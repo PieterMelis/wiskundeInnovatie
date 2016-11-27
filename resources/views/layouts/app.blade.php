@@ -79,6 +79,12 @@
         </nav>
 
         @yield('content')
+        @if (session()->has('messageToastr'))
+            <div class="hidden" id="messageToastr" data-style="{{ session('messageToastr')["style"] }}">
+                <span class="title">{{ session('messageToastr')["title"] }}</span>
+                <span class="content">{!! session('messageToastr')["content"] !!}</span>
+            </div>
+        @endif
     </div>
 
     <!-- Scripts -->

@@ -1,9 +1,24 @@
-
 // Fonts
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-
 // Variables
 @import "variables";
-
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+// Toastr
+@import "node_modules/toastr/build/toastr";
+
+// Mathquill
+@import "node_modules/mathquill/build/mathquill";
+
+.email-register
+{
+  display: flex;
+  align-items: center;
+}
+
+.email-register input
+{
+  flex: 1;
+  margin-right: 5px;
+}
