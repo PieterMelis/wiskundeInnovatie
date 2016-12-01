@@ -6398,4 +6398,11 @@ button.toast-close-button {
   flex: 1;
   margin-right: 5px; }
 
+.mq-math-mode {
+  height: inherit;
+  font-size: 150%; }
+
+.btn-cursor {
+  cursor: pointer; }
+
 /*# sourceMappingURL=app.css.map */

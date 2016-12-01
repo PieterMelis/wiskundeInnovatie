@@ -17,13 +17,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/register/confirm/{token}', 'Auth\RegisterController@confirmEmail');
-<<<<<<< HEAD
 
-Route::get('/solution/add', 'SolutionController@getAdd');
-=======
+Route::get('/solution/add', 'SolutionController@getAdd')->name('solution_add');
+
 Route::get('/new_solutions', 'SolutionController@view_new_solutions');
 Route::get('/new_solution_details/{id}', 'SolutionController@view_new_solution_details');
 Route::get('/add_question', 'MainquestionController@view_add_question');
->>>>>>> 9381daedaced3765499601e8db9c7ba96fdfd9d2
