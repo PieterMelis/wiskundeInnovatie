@@ -11,8 +11,8 @@
 						<form method="POST">
 							<div class="form-group">
 								<label for="solution">Oplossing</label>
-								<input type="text" name="solution" id="solution" class="form-control">
-								<input type="hidden" name="solution-latex">
+								<span id="solution" class="<mq-editable-field mq-math-mode"></span>
+								<input type="hidden" name="solution-latex" id="solution-latex">
 							</div>
 							<div>
 								<input type="submit" class="btn btn-success" value="Oplossing toevoegen">
@@ -35,6 +35,7 @@
 			spaceBehavesLikeTab: true, // configurable
 			handlers: {
 				edit: function() { // useful event handlers
+					console.log(mathField.latex());
 					latexInput.value = mathField.latex(); // simple API
 				}
 			}
