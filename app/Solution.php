@@ -9,10 +9,10 @@ class Solution extends Model
     protected $dates = ['deleted_at'];
     
     protected $fillable = [
-        'comment', 'question_id', 'user_id',
+        'comment', 'verified', 'question_id', 'user_id',
     ];
     
-    public functions user() {
+    public function user() {
         return $this->belongsTo('App\User');
     }
     

@@ -44,6 +44,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
+                        @if(Auth::user()->is_admin)
+                        <li><a href="{{url('new_solutions')}}">Nieuwe oplossingen</a></li>
+                        <li><a href="{{url('add_question')}}">Vraag toevoegen</a></li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->

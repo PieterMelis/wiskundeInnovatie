@@ -12,7 +12,7 @@ class SolutionStep extends Model
         'answer', 'solution_id',
     ];
     
-    public functions user() {
+    public function user() {
         return $this->belongsTo('App\User');
     }
     

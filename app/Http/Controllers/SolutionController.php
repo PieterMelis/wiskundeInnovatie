@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+use App\Solution;
+use App\User;
+
+class SolutionController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    
+    public function view_new_solutions(){
+        
+        //verified not in database yet --> remigrate database
+        //$new_solutions = Solution::where('verified', 1)->has('solution_steps')->with('solution_steps')->get();
+        $new_solutions = Solution::has('solution_steps')->with('solution_steps')->get();
+        
+        return view('admin/new_solutions', ['new_solutions' => $new_solutions]);
+    }
+    
+}

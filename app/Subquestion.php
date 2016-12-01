@@ -12,7 +12,7 @@ class Subquestion extends Model
         'nr', 'question', 'mainquestion_id',
     ];
     
-    public functions question() {
+    public function question() {
         return $this->belongsTo('App\Mainquestion');
     }
     

@@ -16,6 +16,7 @@ class CreateSolutionsTable extends Migration
         Schema::create('solutions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('comment');
+            $table->boolean('verified')->default(false);
             $table->integer('question_id')->unsigned()->index();
             $table->foreign('question_id')->references('id')->on('mainquestions')->onDelete('cascade');
             $table->integer('user_id')->unsigned()->index();

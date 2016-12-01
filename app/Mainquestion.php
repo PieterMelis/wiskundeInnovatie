@@ -13,7 +13,7 @@ class Mainquestion extends Model
     ];
     
     
-    public functions chapter() {
+    public function chapter() {
         return $this->belongsTo('App\Chapter');
     }
     
