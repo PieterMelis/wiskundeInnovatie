@@ -7,7 +7,7 @@
 
 require('./bootstrap');
 window.toastr = require('toastr');
-window.MathQuill = require('mathquill/build/mathquill.js');
+require('mathquill/build/mathquill');
 
 require('./toastr');
 

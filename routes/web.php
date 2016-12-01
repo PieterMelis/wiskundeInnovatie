@@ -19,3 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::get('/register/confirm/{token}', 'Auth\RegisterController@confirmEmail');
+
+Route::get('/solution/add', 'SolutionController@getAdd');
