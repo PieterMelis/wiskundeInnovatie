@@ -61,4 +61,8 @@ class User extends Authenticatable
 
 		$this->save();
 	}
+    
+    public function solutions() {
+        return $this->hasMany('App\Solution');
+    }
 }
