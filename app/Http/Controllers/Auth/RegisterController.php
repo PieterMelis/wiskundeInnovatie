@@ -92,17 +92,13 @@ class RegisterController extends Controller {
 			);
 		}
 
-		//Auth::login($this->create($request->all()));
 		$user = $this->create( $request->all() );
-
 		$user->notify( new EmailConfirm( $user ) );
 
 		flashToastr( "info", "Check Email", "Check your mailbox for the confirmation email." );
 
 
-		//return view('auth.register');
 		return redirect( "login" );
-		//return redirect($this->redirectPath());
 	}
 
 	/**
