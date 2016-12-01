@@ -16,8 +16,8 @@ class Solution extends Model
         return $this->belongsTo('App\User');
     }
     
-    public function question() {
-        return $this->belongsTo('App\Question');
+    public function mainquestion() {
+        return $this->belongsTo('App\Mainquestion', 'question_id');
     }
     
     public function subquestion() {
