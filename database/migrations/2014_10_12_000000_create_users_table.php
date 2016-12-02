@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration {
 			$table->string( 'email' )->unique();
 			$table->string( 'password' );
 			$table->boolean( "is_admin" )->default( false );
+            $table->boolean( "is_superadmin" )->default(false);
 			$table->boolean( "verified" )->default( false );
 			$table->string( "token_mail" )->nullable();
 			$table->string( "tempMail" )->nullable();

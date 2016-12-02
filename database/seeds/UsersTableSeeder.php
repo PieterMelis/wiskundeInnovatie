@@ -24,5 +24,13 @@ class UsersTableSeeder extends Seeder {
 			'verified'   => 1,
 			'token_mail' => NULL,
 		] );
+        DB::table( 'users' )->insert( [
+			'name'       => "Sarah Jehin",
+			'email'      => "sarah.jehin@student.kdg.be",
+			'password'   => bcrypt( 'wiskunde' ),
+			'is_admin'   => 1,
+			'verified'   => 1,
+			'token_mail' => NULL,
+		] );
 	}
 }
