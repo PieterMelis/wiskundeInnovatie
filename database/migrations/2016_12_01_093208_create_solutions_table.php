@@ -17,6 +17,9 @@ class CreateSolutionsTable extends Migration
             $table->increments('id');
             $table->string('comment');
             $table->boolean('verified')->default(false);
+            $table->integer('verified_by')->unsigned()->nullable();
+            $table->foreign('verified_by')->references('id')->on('users')->onDelete('cascade');
+            $table->datetime('verified_on')->nullable();
             $table->integer('mainquestion_id')->unsigned()->nullable();
             $table->foreign('mainquestion_id')->references('id')->on('mainquestions')->onDelete('cascade');
             $table->integer('subquestion_id')->unsigned()->nullable();

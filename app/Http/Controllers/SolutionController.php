@@ -35,4 +35,20 @@ class SolutionController extends Controller {
 		return view('admin/solution_details', ['solution' => $solution]);
 
 	}
+    
+    public function accept_solution($id) {
+        $solution = Solution::find($id);
+        $solution->verified = 1;
+        $solution->verified_by = Auth::user()->id;
+        $solution->verified_on = \Carbon\Carbon::now();
+        $solution->save();
+    }
+    
+    public function decline_solution($id) {
+        $solution = Solution::find($id);
+        $solution->verified = 2; //2 means a solution is declined and will not appear in the new solutions overview
+        $solution->save();
+    }
+    
+    
 }

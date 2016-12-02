@@ -11,7 +11,7 @@ class Subchapter extends Model
     protected $dates = ['deleted_at'];
     
     protected $fillable = [
-        'nr', 'name', 'mainchapter_id',
+        'nr', 'name', 'chapter_id',
     ];
     
     
