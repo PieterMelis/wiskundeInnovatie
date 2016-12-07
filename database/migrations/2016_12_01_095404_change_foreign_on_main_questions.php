@@ -31,7 +31,7 @@ class ChangeForeignOnMainQuestions extends Migration {
 		Schema::table( 'mainquestions', function ( Blueprint $table ) {
 			$table->dropForeign( [ 'subchapter_id' ] );
 			$table->dropColumn( 'subchapter_id' );
-			$table->integer( 'chapter_id' )->unsigned()->index()->after( 'has_subquestions' );
+			$table->integer( 'chapter_id' )->unsigned()->index()->after( 'has_subquestions' )->default( 1 );
 			$table->foreign( 'chapter_id' )
 			      ->references( 'id' )
 			      ->on( 'chapters' )

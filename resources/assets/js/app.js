@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * include Vue and Vue Resource. This gives a great starting point for
@@ -7,10 +6,10 @@
 
 require('./bootstrap');
 window.toastr = require('toastr');
+window.swal = require('sweetalert2');
 require('mathquill/build/mathquill');
 
 require('./toastr');
-
 
 
 /**
