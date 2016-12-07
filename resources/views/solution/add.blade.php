@@ -97,22 +97,39 @@
 				spaceBehavesLikeTab: true, // configurable
 				handlers: {
 					edit: function () {
-						// Live render the latex
-						var liveLatex = mathField.latex();
-						console.log(liveLatex);
-						MQ.StaticMath(liveRender).latex(liveLatex);
-						// Set the latex into a hidden textfield
-						latexInput.value = liveLatex;
+						//						render_live_math();
 					}
 				}
 			});
+			
+			var render_live_math = function () {
+				// Live render the latex
+				var liveLatex = mathField.latex();
+				console.log(liveLatex);
+				MQ.StaticMath(liveRender).latex(liveLatex);
+				// Set the latex into a hidden textfield
+				latexInput.value = liveLatex;
+			};
+			
+			var set_latex_to_live = function ( latex ) {
+				mathField.latex(latex).focus();
+				render_live_math();
+			};
+			
 			// Empty the input math field
-			mathField.latex("");
+			set_latex_to_live("");
+			
+			var $mathFieldLive = $("#solution");
+			$mathFieldLive.on("keyup", "textarea", function () {
+				console.log("up");
+				render_live_math();
+			});
+			
 			
 			// Find the math control buttons
 			var $mathControls = $('.math-controls');
 			
-			$mathControls.find('div').each(function ( i ) {
+			$mathControls.find('div').each(function () {
 				// Render the math in the math control buttons
 				MQ.StaticMath($(this)[ 0 ]);
 			});
@@ -132,6 +149,9 @@
 				// Lose focus from button
 				$(this).find('.mq-hasCursor').removeClass('mq-hasCursor');
 				
+				// Make sure it is renderd
+				render_live_math();
+				
 				// Focus the math field input
 				mathField.focus();
 			});
@@ -146,12 +166,12 @@
 					stop_editing();
 				});
 			
-			$("#solution").on("keyup", "textarea", function ( event ) {
+			$mathFieldLive.on("keyup", "textarea", function ( event ) {
 				if (event.keyCode === 13 && event.altKey) {
 					console.log("trigA");
 					var latex = add_new_solution_step();
 					console.log(latex);
-					copy_latex_to_live(latex);
+					set_latex_to_live(latex);
 				}
 				else if (event.keyCode === 13) {
 					console.log("trigC");
@@ -174,7 +194,7 @@
 				.on("click", ".solution-step-controls .copy", function () {
 					// Copy the latex into the math field input
 					var latex = $(this).parent().next().val();
-					copy_latex_to_live(latex);
+					set_latex_to_live(latex);
 				});
 			
 			$(".mq-hasCursor").removeClass('mq-hasCursor');
@@ -201,7 +221,7 @@
 				$("#solution-live-render").before($newStep);
 				
 				// Focus the math field input
-				mathField.latex("").focus();
+				set_latex_to_live("");
 				
 				check_if_editing();
 				
@@ -223,13 +243,13 @@
 			
 			var set_and_render_latex_to_step = function ( $rootStep, latex ) {
 				var $latexInput = $rootStep.find("input");
-				var mathField = $rootStep.find(".render-field")[ 0 ];
+				var mathFieldStep = $rootStep.find(".render-field")[ 0 ];
 				
 				// Set the input of the template to latex input
 				$latexInput.val(latex);
 				
 				// Render the math of the template
-				MQ.StaticMath(mathField).latex(latex);
+				MQ.StaticMath(mathFieldStep).latex(latex);
 			};
 			
 			var fetch_live_latex = function () {
@@ -237,7 +257,7 @@
 				return $latexLiveRender.val();
 			};
 			
-			var check_if_editing = function(){
+			var check_if_editing = function () {
 				if (is_editing !== null) {
 					// If an other is being edited, discard current edit
 					stop_editing();
@@ -251,7 +271,7 @@
 				is_editing = $root_solution_step.data("counter");
 				
 				var latex = $root_solution_step.find("input").first().val();
-				copy_latex_to_live(latex);
+				set_latex_to_live(latex);
 			};
 			
 			var stop_editing = function () {
@@ -261,7 +281,7 @@
 				$root_solution_step.removeClass("is_editing");
 				
 				// Make live empty
-				copy_latex_to_live("");
+				set_latex_to_live("");
 				
 				// set the global var to null
 				is_editing = null;
@@ -274,10 +294,6 @@
 				set_and_render_latex_to_step($root_editing_element, latex);
 				
 				stop_editing();
-			};
-			
-			var copy_latex_to_live = function ( latex ) {
-				mathField.latex(latex).focus();
 			};
 			
 		})(window, window.document, window.jQuery);
