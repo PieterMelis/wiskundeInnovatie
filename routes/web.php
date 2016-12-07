@@ -24,4 +24,15 @@ Route::get('/solution/add', 'SolutionController@getAdd')->name('solution_add');
 
 Route::get('/new_solutions', 'SolutionController@view_new_solutions');
 Route::get('/new_solution_details/{id}', 'SolutionController@view_new_solution_details');
+Route::get('/accept_new_solution/{id}', 'SolutionController@accept_solution');
+Route::get('/decline_new_solution/{id}', 'SolutionController@decline_solution');
 Route::get('/add_question', 'MainquestionController@view_add_question');
+
+//chapters
+Route::get('/add_chapter', 'ChapterController@show_add_chapter');
+Route::post('/add_chapter', 'ChapterController@add_chapter');
+Route::get('/edit_chapter/{id}', 'ChapterController@show_edit_chapter');
+Route::post('/edit_chapter', 'ChapterController@edit_chapter');
+Route::get('/add_subchapter', 'SubchapterController@show_add_subchapter');
+Route::post('/add_subchapter', 'SubchapterController@add_subchapter');
+

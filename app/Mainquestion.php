@@ -28,7 +28,7 @@ class Mainquestion extends Model
     }
     
     public function solution() {
-        return $this->hasOne('App\Solution');
+        return $this->hasMany('App\Solution');
     }
     
      public function images() {

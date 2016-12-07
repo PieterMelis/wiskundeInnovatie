@@ -24,8 +24,8 @@
                     
                     
                     <div>
-                        <a href="#">Accepteer deze oplossing</a>
-                        <a href="#">Wijs deze oplossing af</a>
+                        <a href="{{url('accept_new_solution/'.$solution->id)}}">Accepteer deze oplossing</a>
+                        <a href="{{url('decline_new_solution/'.$solution->id)}}">Wijs deze oplossing af</a>
                     </div>
                     
                 </div>

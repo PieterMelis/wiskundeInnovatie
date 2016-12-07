@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Mainquestion;
+use App\Chapter;
+use App\Subchapter;
 use App\User;
 
 class MainquestionController extends Controller
@@ -17,8 +19,8 @@ class MainquestionController extends Controller
     
     public function view_add_question(){
         
-        $questions = Mainquestion::all();
+        $chapters = Chapter::with('subchapters')->get();
         
-        return view('admin/add_question', ['questions' => $questions]);
+        return view('admin/add_question', ['chapters' => $chapters]);
     }
 }

@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Vraag toevoegen</div>
+                <div class="panel-heading">Hoofdstuk toevoegen</div>
 
                 <div class="panel-body">
-                    <form method="post" action="{{url('/add_question')}}">
+                    <form method="post" action="{{url('/add_subchapter')}}">
                         {{ csrf_field() }}
                         <div>
                             <label for="nr">Nummer:</label>
@@ -16,25 +16,17 @@
                         </div>
                         
                         <div>
-                            <label for="question">Vraag:</label>
-                            <input type="text" name="question" id="question" required>
+                            <label for="name">Naam:</label>
+                            <input type="text" name="name" id="name" required>
                         </div>
                         
                         <div>
                             <label for="chapter">Hoofdstuk:</label>
                             <select name="chapter" id="chapter">
                                 @foreach($chapters as $chapter)
-                                @foreach($chapter->subchapters as $subchapter)
-                                <option value="{{$subchapter->id}}">{{$chapter->nr}}.{{$subchapter->nr}} {{$subchapter->name}}</option>
-                                @endforeach
+                                <option value="{{$chapter->id}}">{{$chapter->nr}} {{$chapter->name}}</option>
                                 @endforeach
                             </select>
-                        </div>
-                        
-                        <div>
-                            <label for="subquestions">Bevat subvragen:</label>
-                            <input type="checkbox" id="subquestions" name="subquestions">
-                            <div>Als bovenstaande gechecked wordt moet er een form-deel zichtbaar worden waarop je de subvragen ineens kan toevoegen</div>
                         </div>
                         
                         <div>
