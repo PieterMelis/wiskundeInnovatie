@@ -2,14 +2,19 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
 // Variables
 @import "variables";
+// Font Awesome
+@import "font-awesome/font-awesome";
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-
 // Toastr
 @import "node_modules/toastr/build/toastr";
-
 // Mathquill
 @import "node_modules/mathquill/build/mathquill";
+// Balloon-css
+@import "node_modules/balloon-css/src/balloon";
+
+// Balloon-css
+@import "node_modules/sweetalert2/src/sweetalert2";
 
 .email-register
 {
@@ -25,7 +30,7 @@
 
 .mq-math-mode
 {
-  height:inherit;
+  height: inherit;
   font-size: 150%;
 }
 
@@ -33,3 +38,40 @@
 {
   cursor: pointer;
 }
+
+#solution-template
+{
+  opacity: 0;
+  display: none;
+}
+
+.solution-step
+{
+  border: 1px dashed white;
+  margin: 1px 0;
+  position: relative;
+}
+
+.solution-step-controls
+{
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  > i.fa
+  {
+    cursor: pointer;
+    margin: 0 2px;
+  }
+}
+
+.is_editing
+{
+  border-color: #BD362F;
+}
+
+.solution-step:not(#solution-live-render):not(.is_editing):hover
+{
+  border-color: darkgray;
+}
+
