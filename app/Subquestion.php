@@ -9,7 +9,7 @@ class Subquestion extends Model
     protected $dates = ['deleted_at'];
     
     protected $fillable = [
-        'nr', 'question', 'mainquestion_id',
+        'nr', 'question', 'has_subquestions', 'mainquestion_id',
     ];
     
     public function question() {

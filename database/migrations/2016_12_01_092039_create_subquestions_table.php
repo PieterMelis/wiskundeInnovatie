@@ -17,7 +17,6 @@ class CreateSubquestionsTable extends Migration
             $table->increments('id');
             $table->integer('nr');
             $table->string('question');
-            $table->boolean('has_subquestions');
             $table->integer('mainquestion_id')->unsigned()->index();
             $table->foreign('mainquestion_id')->references('id')->on('mainquestions')->onDelete('cascade');
             $table->softDeletes();

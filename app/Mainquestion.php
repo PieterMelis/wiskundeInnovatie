@@ -9,7 +9,7 @@ class Mainquestion extends Model
     protected $dates = ['deleted_at'];
     
     protected $fillable = [
-        'nr', 'question', 'has_subquestions', 'chapter_id',
+        'nr', 'question', 'has_subquestions', 'subchapter_id',
     ];
     
     

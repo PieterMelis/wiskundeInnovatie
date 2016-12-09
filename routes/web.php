@@ -26,7 +26,11 @@ Route::get('/new_solutions', 'SolutionController@view_new_solutions');
 Route::get('/new_solution_details/{id}', 'SolutionController@view_new_solution_details');
 Route::get('/accept_new_solution/{id}', 'SolutionController@accept_solution');
 Route::get('/decline_new_solution/{id}', 'SolutionController@decline_solution');
+
+//questions
+Route::get('/question_overview', 'MainquestionController@view_question_overview');
 Route::get('/add_question', 'MainquestionController@view_add_question');
+Route::post('/add_question', 'MainquestionController@add_question');
 
 //chapters
 Route::get('/add_chapter', 'ChapterController@show_add_chapter');
