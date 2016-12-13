@@ -9,7 +9,7 @@ class SolutionStep extends Model
     protected $table = "solution_steps";
     
     protected $fillable = [
-        'answer', 'solution_id',
+        'answer', 'solution_id','step'
     ];
     
     public function user() {

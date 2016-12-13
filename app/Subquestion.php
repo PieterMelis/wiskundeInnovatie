@@ -12,8 +12,8 @@ class Subquestion extends Model
         'nr', 'question', 'has_subquestions', 'mainquestion_id',
     ];
     
-    public function question() {
-        return $this->belongsTo('App\Mainquestion');
+    public function questions() {
+        return $this->belongsTo('App\Mainquestion', 'mainquestion_id');
     }
     
     public function solution() {

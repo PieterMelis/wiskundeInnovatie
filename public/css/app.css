@@ -9609,6 +9609,8 @@ body.swal2-iosfix {
 .mq-math-mode {
   height: inherit;
   font-size: 150%; }
+  .mq-math-mode .mq-root-block {
+    overflow: visible; }
 
 .btn-cursor {
   cursor: pointer; }
@@ -9635,5 +9637,8 @@ body.swal2-iosfix {
 
 .solution-step:not(#solution-live-render):not(.is_editing):hover {
   border-color: darkgray; }
+
+sup.mq-nthroot {
+  top: -0.25em; }
 
 /*# sourceMappingURL=app.css.map */

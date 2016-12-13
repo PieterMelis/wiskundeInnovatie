@@ -9,9 +9,12 @@
 					
 					<div class="panel-body">
 						<div class="question">
-							Placeholder for question
+							@foreach($questions as $question)
+								<p>{{$question}}</p>
+							@endforeach
 						</div>
 						<form method="POST">
+							{{ csrf_field() }}
 							<div class="form-group" id="render-solution">
 								<div class="solution-step" id="solution-template">
 									<div class="render-field" id="render-template"></div>
@@ -20,12 +23,12 @@
 										<i class="fa fa-pencil edit" aria-hidden="true"></i>
 										<i class="fa fa-times delete" aria-hidden="true"></i>
 									</div>
-									<input type="hidden" name="solutions-latex[]" class="solution-latex">
+									<input type="hidden" name="solutions-latex-template" data-name="solution_latex[]" class="solution-latex">
 								</div>
 								<div class="solution-step" id="solution-live-render">
 									<p>Live preview</p>
 									<div id="live-render"></div>
-									<input type="hidden" name="solutions-latex[]" id="solution-latex-live">
+									<input type="hidden" name="solutions-latex-live" id="solution-latex-live">
 								</div>
 							</div>
 							<div class="form-group">
@@ -173,12 +176,17 @@
 			// When enter, add a new solution
 			// When alt+enter, add a new solution and copy the previous
 			$mathFieldLive.on("keyup", "textarea", function ( event ) {
-				if (event.keyCode === 13 ) {
+				if (event.keyCode === 13) {
 					// Add new solution
-					var latex = add_new_solution_step();
-					if(event.altKey) {
-						// Render if the alt key is also pressed
-						set_latex_to_live(latex);
+					if (is_editing !== null) {
+						push_editing_to_step();
+					}
+					else {
+						var latex = add_new_solution_step();
+						if (event.altKey) {
+							// Render if the alt key is also pressed
+							set_latex_to_live(latex);
+						}
 					}
 				}
 			});
@@ -193,6 +201,7 @@
 				.on("click", ".solution-step-controls .delete", function () {
 					// Delete a solution step (remove the parent)
 					$(this).parent().parent().remove();
+					stop_editing();
 				})
 				.on("click", ".solution-step-controls .copy", function () {
 					// Copy the latex into the math field input
@@ -241,11 +250,13 @@
 				// Find the template in the dom and clone in new jQuery object
 				var $template = $("#solution-template").clone();
 				var $mathRender = $template.find("#render-template");
+				var $input = $template.find("input");
 				
 				// Change the ids to unique ids with solution step
 				$template.attr('id', 'solution-' + solutionStepCounter);
 				$mathRender.attr('id', 'render-' + solutionStepCounter);
 				$template.data('counter', solutionStepCounter);
+				$input.attr('name', $input.data("name"));
 				
 				return $template;
 			};

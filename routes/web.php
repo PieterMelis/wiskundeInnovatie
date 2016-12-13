@@ -20,7 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/register/confirm/{token}', 'Auth\RegisterController@confirmEmail');
 
-Route::get('/solution/add', 'SolutionController@getAdd')->name('solution_add');
+Route::get('/solution/add/{mainQuestion}/{subQuestion?}', 'SolutionController@getAdd')->name('solution_add');
+Route::post('/solution/add/{mainQuestion}/{subQuestion?}', 'SolutionController@postAdd')->name('solution_add');
 
 Route::get('/new_solutions', 'SolutionController@view_new_solutions');
 Route::get('/new_solution_details/{id}', 'SolutionController@view_new_solution_details');

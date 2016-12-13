@@ -12,7 +12,6 @@
 @import "node_modules/mathquill/build/mathquill";
 // Balloon-css
 @import "node_modules/balloon-css/src/balloon";
-
 // Balloon-css
 @import "node_modules/sweetalert2/src/sweetalert2";
 
@@ -32,6 +31,11 @@
 {
   height: inherit;
   font-size: 150%;
+
+  .mq-root-block
+  {
+    overflow: visible;
+  }
 }
 
 .btn-cursor
@@ -75,3 +79,7 @@
   border-color: darkgray;
 }
 
+sup.mq-nthroot
+{
+  top: -0.25em;
+}
