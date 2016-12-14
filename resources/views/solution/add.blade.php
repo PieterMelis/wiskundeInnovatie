@@ -13,9 +13,10 @@
 								<p>{{$question}}</p>
 							@endforeach
 						</div>
-						<form method="POST">
+						<form method="POST" enctype="multipart/form-data">
 							{{ csrf_field() }}
-							<div class="form-group" id="render-solution">
+							<div class="form-group{{ $errors->has('solution_latex') ? ' has-error' : '' }}"
+								 id="render-solution">
 								<div class="solution-step" id="solution-template">
 									<div class="render-field" id="render-template"></div>
 									<div class="solution-step-controls">
@@ -23,15 +24,21 @@
 										<i class="fa fa-pencil edit" aria-hidden="true"></i>
 										<i class="fa fa-times delete" aria-hidden="true"></i>
 									</div>
-									<input type="hidden" name="solutions-latex-template" data-name="solution_latex[]" class="solution-latex">
+									<input type="hidden" name="solutions-latex-template" data-name="solution_latex[]"
+										   class="solution-latex">
 								</div>
 								<div class="solution-step" id="solution-live-render">
 									<p>Live preview</p>
 									<div id="live-render"></div>
 									<input type="hidden" name="solutions-latex-live" id="solution-latex-live">
 								</div>
+								@if ($errors->has('solution_latex'))
+									<span class="help-block">
+                                        <strong>{{ $errors->first('solution_latex') }}</strong>
+                                    </span>
+								@endif
 							</div>
-							<div class="form-group">
+							<div class="form-group" id="math">
 								<label for="solution">Oplossing</label>
 								<div class="math-controls">
 									<div class="btn btn-default btn-cursor" data-type="cmd" data-balloon="\sqrt"
@@ -65,7 +72,13 @@
 							</div>
 							<div class="solution-controls">
 								<div class="btn btn-default" id="add-step-solution">Nieuwe tussen stap toevoegen</div>
-								<div class="btn btn-default" id="add-photo">Foto toevoegen</div>
+								{{--<div class="btn btn-default" id="add-photo">Foto toevoegen</div>--}}
+							</div>
+							
+							<div class="form-group" id="picture">
+								<label for="picture">Voeg een foto toe</label>
+								<input id="picture-file" name="picture[]" type="file" multiple>
+								<div id="errorBlock" class="help-block"></div>
 							</div>
 							<div>
 								<input type="submit" class="btn btn-success" value="Oplossing toevoegen">
@@ -81,6 +94,18 @@
 @section('pageJs')
 	<script>
 		(function ( window, document, $, undefined ) {
+			// Picture handler
+			$("#picture-file").fileinput({
+				showUpload: false,
+				theme: 'fa',
+				language: 'nl',
+				maxFileCount: 5,
+				allowedFileTypes: [ "image" ],
+				maxFileSize: (5 * 1024),
+				elErrorContainer: "#errorBlock",
+			});
+			
+			
 			// Set step counter to zero
 			var solutionStepCounter = 0;
 			
@@ -213,10 +238,11 @@
 			$(".mq-hasCursor").removeClass('mq-hasCursor');
 			
 			// Handles when they want a new step
-			$(".solution-controls").on("click", "#add-step-solution", function () {
-				// Add a new step
-				add_new_solution_step();
-			});
+			$(".solution-controls")
+				.on("click", "#add-step-solution", function () {
+					// Add a new step
+					add_new_solution_step();
+				});
 			
 			// Aad a new step
 			var add_new_solution_step = function () {

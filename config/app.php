@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Europe/Brussels',
 
     /*
     |--------------------------------------------------------------------------
@@ -179,7 +179,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
 	    Barryvdh\Debugbar\ServiceProvider::class,
-
+	    Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
     ],
 
     /*

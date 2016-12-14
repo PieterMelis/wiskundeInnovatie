@@ -9,7 +9,12 @@ window.toastr = require('toastr');
 window.swal = require('sweetalert2');
 require('mathquill/build/mathquill');
 
+require('bootstrap-fileinput/js/fileinput');
+require('bootstrap-fileinput/js/locales/nl');
+require('bootstrap-fileinput/themes/fa/theme');
+
 require('./toastr');
+require('./fileinput');
 
 
 /**

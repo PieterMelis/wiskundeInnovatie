@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Mainquestion;
 use App\Solution;
-use App\SolutionStep;
 use App\Subquestion;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class SolutionController extends Controller {
 	public function __construct() {
@@ -29,12 +29,20 @@ class SolutionController extends Controller {
 	}
 
 	public function postAdd( Mainquestion $mainQuestion, Subquestion $subQuestion = NULL, Request $request ) {
-		// Todo: Add validation
+		$to_validate = [
+			"solution_latex" => "required",
+		];
+
+		$messages = [
+			'solution_latex.required' => 'Je moet minstens 1 tussen stap toevoegen.',
+		];
+
+		$this->validate($request, $to_validate, $messages);
+
 		$solution_steps = $request->solution_latex;
 
 		if($this->check_if_subQuestion_belongs_to_mainQuestion($mainQuestion, $subQuestion)){
 			// Has sub question
-			dump('subquestion');
 			$solution = $request->user()->solutions()->create([
 				"subquestion_id" => $subQuestion->id,
 				"mainquestion_id" => $mainQuestion->id,
@@ -51,12 +59,18 @@ class SolutionController extends Controller {
 
 		foreach ($solution_steps as $step)
 		{
-			dump($step);
 			$solution->solution_steps()->create([
 				"step" => $step,
 			]);
 		}
-		dd($solution_steps);
+
+		foreach ($request->picture as $picture)
+		{
+			$solution->addMedia($picture)
+			         ->toMediaLibrary();
+		}
+
+
 	}
 
 	private function check_if_subQuestion_belongs_to_mainQuestion(Mainquestion $mainQuestion, Subquestion $subQuestion){
