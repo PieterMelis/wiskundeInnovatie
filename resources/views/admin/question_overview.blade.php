@@ -28,7 +28,6 @@
                 <div class="panel-heading">Vragenoverzicht</div>
 
                 <div class="panel-body">
-                   
                     @foreach($chapters as $chapter)
                     <div class="chapter">
                         <h2>{{$chapter->nr}}. {{$chapter->name}}</h2>
@@ -37,10 +36,10 @@
                             <h3>{{$subchapter->nr}}. {{$subchapter->name}}</h3>
                             @foreach($subchapter->mainquestions as $mainquestion)
                             <div class="mainquestion">
-                                <h4>{{$mainquestion->nr}}. {{$mainquestion->question}}</h4>
+                                <h4>{{$mainquestion->nr}}. <span class="latex_main">{{$mainquestion->question}}</span></h4>
                                 @foreach($mainquestion->subquestions as $subquestion)
                                 <div class="subquestion">
-                                    {{$subquestion->nr}}. {{$subquestion->question}}
+                                    {{$subquestion->nr}}. <span class="latex_sub">{{$subquestion->question}}</span>
                                 </div>
                                 @endforeach
                             </div>
@@ -56,4 +55,27 @@
 </div>
 
 
+@endsection
+
+@section('pageJs')
+	<script>
+		(function ( $, MathQuill ) {
+            
+            var MQ = MathQuill.getInterface(2); // for backcompat
+            
+            var latex_main = document.getElementsByClassName('latex_main');
+            for(var i = 0; i< latex_main.length; i++) {
+                console.log(latex_main[i]);
+                MQ.StaticMath(latex_main[i]);
+            }
+            
+            var latex_sub = document.getElementsByClassName('latex_sub');
+            for(var i = 0; i< latex_sub.length; i++) {
+                console.log(latex_sub[i]);
+                MQ.StaticMath(latex_sub[i]);
+            }
+            
+            
+		})(jQuery, MathQuill);
+	</script>
 @endsection
