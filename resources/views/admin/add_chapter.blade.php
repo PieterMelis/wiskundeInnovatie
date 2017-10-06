@@ -19,7 +19,6 @@
                             <label for="name">Naam:</label>
                             <input type="text" name="name" id="name" required>
                         </div>
-                        
                         <div>
                             <input class="btn btn-success" type="submit" value="Opslagen">
                         </div>
